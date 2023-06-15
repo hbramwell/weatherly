@@ -34,3 +34,13 @@ async function getWeather(city: string): Promise<any> {
 		console.error(error)
 	}
 }
+
+function saveLocation(city: string): void {
+	conn.run('INSERT INTO locations (city) VALUES (?)', [city], (err) => {
+		if (err) {
+			console.error('Failed to save location:', err)
+		} else {
+			console.log(`Location "${city}" saved successfully`)
+		}
+	})
+}
