@@ -44,3 +44,15 @@ function saveLocation(city: string): void {
 		}
 	})
 }
+
+function showSavedLocations(): Promise<any[]> {
+	return new Promise((resolve, reject) => {
+		conn.all('SELECT * FROM locations', (err, rows) => {
+			if (err) {
+				reject(new Error(`Failed to retrieve locations: ${err.message}`))
+			} else {
+				resolve(rows)
+			}
+		})
+	})
+}
