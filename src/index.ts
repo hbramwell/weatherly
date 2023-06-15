@@ -78,3 +78,83 @@ function closeConnection(): void {
 		}
 	})
 }
+
+async function main(): Promise<void> {
+	program
+		.name('Weather App')
+		.description('A simple weather forecast application')
+		.version('1.0.0')
+
+	program
+		.command('get <city>')
+		.description('Get weather forecast by city name')
+		.action(async (city: string) => {
+			try {
+				const weatherData = await getWeather(city)
+				console.log(weatherData)
+
+				const { save } = await inquirer.prompt([
+					{
+						type: 'confirm',
+						name: 'save',
+						message: 'Do you want to save this location?',
+						default: false,
+					},
+				])
+
+				if (save) {
+					saveLocation(city)
+				}
+			} catch (error) {
+				if (error instanceof Error) {
+					console.error(error.message)
+				}
+			}
+		})
+
+	program
+		.command('show')
+		.description('Show saved locations')
+		.action(async () => {
+			try {
+				const locations = await showSavedLocations()
+				locations.forEach((location) => console.log(location))
+			} catch (error) {
+				if (error instanceof Error) {
+					console.error(error.message)
+				}
+			}
+		})
+
+	program
+		.command('delete <city>')
+		.description('Delete a saved location')
+		.action(async (city: string) => {
+			try {
+				deleteLocation(city)
+			} catch (error) {
+				if (error instanceof Error) {
+					console.error(error.message)
+				}
+			}
+		})
+
+	program
+		.command('exit')
+		.description('Exit the application')
+		.action(() => {
+			closeConnection()
+		})
+
+	process.on('SIGINT', () => {
+		closeConnection()
+	})
+
+	try {
+		await program.parseAsync(process.argv)
+	} catch (error) {
+		console.error('An error occurred:', error)
+	}
+}
+
+main()
