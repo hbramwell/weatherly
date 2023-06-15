@@ -1,15 +1,20 @@
 import axios from 'axios'
-import * as sqlite3 from 'sqlite3'
 import inquirer from 'inquirer'
 import { program } from 'commander'
 import { env } from 'process'
 import { config } from 'dotenv'
+import sqlite3 from 'sqlite3'
 
 config()
 
 const API_KEY = env.API_KEY
 
-const conn = new sqlite3.Database('./db.locations')
+if (!API_KEY) {
+	console.error('API key not found')
+	process.exit(1)
+}
+
+const conn = new sqlite3.Database('weather.db')
 
 conn.serialize(() => {
 	conn.run(
@@ -63,18 +68,6 @@ function deleteLocation(city: string): void {
 			console.error('Failed to delete location:', err)
 		} else {
 			console.log(`Location "${city}" deleted successfully`)
-		}
-	})
-}
-
-function closeConnection(): void {
-	conn.close((err) => {
-		if (err) {
-			console.error('Failed to close database connection:', err)
-			process.exit(1)
-		} else {
-			console.log('Database connection closed')
-			process.exit()
 		}
 	})
 }
@@ -138,17 +131,6 @@ async function main(): Promise<void> {
 				}
 			}
 		})
-
-	program
-		.command('exit')
-		.description('Exit the application')
-		.action(() => {
-			closeConnection()
-		})
-
-	process.on('SIGINT', () => {
-		closeConnection()
-	})
 
 	try {
 		await program.parseAsync(process.argv)
