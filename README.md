@@ -86,6 +86,3 @@ Weatherly was developed by brmwll as a showcase application using the OpenWeathe
 
 This project is licensed under the [LICENSE](LICENSE).
 
----
-
-Give it a short and creative name: **Weatherly - CliMate**
