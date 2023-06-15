@@ -80,11 +80,11 @@ Make sure these dependencies are installed by running `npm install` before using
 
 ### Credits
 
-Weatherly was developed by [Your Name] as a showcase application using the OpenWeatherMap API.
+Weatherly was developed by brmwll as a showcase application using the OpenWeatherMap API.
 
 ### License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the [LICENSE](LICENSE).
 
 ---
 
