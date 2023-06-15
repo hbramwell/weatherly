@@ -56,3 +56,13 @@ function showSavedLocations(): Promise<any[]> {
 		})
 	})
 }
+
+function deleteLocation(city: string): void {
+	conn.run('DELETE FROM locations WHERE city = ?', [city], (err) => {
+		if (err) {
+			console.error('Failed to delete location:', err)
+		} else {
+			console.log(`Location "${city}" deleted successfully`)
+		}
+	})
+}
