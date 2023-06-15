@@ -5,17 +5,20 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "node dist/index.js",
-		"dev": "tsx --watch src/index.ts"
+		"dev": "tsx --watch src/index.ts",
+		"build": "tsc"
 	},
 	"dependencies": {
 		"axios": "^1.4.0",
 		"commander": "^10.0.1",
-		"inquirer": "^9.2.7",
+		"inquirer": "^8.0.0",
 		"sqlite3": "^5.1.6"
 	},
 	"devDependencies": {
 		"@tsconfig/node18": "^2.0.1",
+		"@types/inquirer": "^9.0.3",
 		"@types/node": "^20.3.1",
+		"esm": "^3.2.25",
 		"tsx": "^3.12.7",
 		"typescript": "^5.1.3"
 	}
