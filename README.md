@@ -76,7 +76,7 @@ Weatherly relies on the following dependencies:
 - `dotenv`: For loading environment variables.
 - `sqlite3`: For managing the SQLite database.
 
-Make sure these dependencies are installed by running `npm install` before using Weatherly.
+Make sure these dependencies are installed by running `yarn` before using Weatherly.
 
 ### Credits
 
