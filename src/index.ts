@@ -66,3 +66,15 @@ function deleteLocation(city: string): void {
 		}
 	})
 }
+
+function closeConnection(): void {
+	conn.close((err) => {
+		if (err) {
+			console.error('Failed to close database connection:', err)
+			process.exit(1)
+		} else {
+			console.log('Database connection closed')
+			process.exit()
+		}
+	})
+}
