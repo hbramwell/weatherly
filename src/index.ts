@@ -13,12 +13,24 @@ const conn = new sqlite3.Database('./db.locations')
 
 conn.serialize(() => {
 	conn.run(
-		'CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY, city TEXT)'
+		'CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY, city TEXT)',
+		(err) => {
+			if (err) {
+				console.error('Failed to create locations table:', err)
+				process.exit(1)
+			} else {
+				console.log('Locations table created successfully')
+			}
+		}
 	)
 })
 
 async function getWeather(city: string): Promise<any> {
 	const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
-	const response = await axios.get(url)
-	return response.data
+	try {
+		const response = await axios.get(url)
+		return response.data
+	} catch (error) {
+		console.error(error)
+	}
 }
