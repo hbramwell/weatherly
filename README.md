@@ -78,10 +78,6 @@ Weatherly relies on the following dependencies:
 
 Make sure these dependencies are installed by running `yarn` before using Weatherly.
 
-### Credits
-
-Weatherly was developed by brmwll as a showcase application using the OpenWeatherMap API.
-
 ### License
 
 This project is licensed under the [LICENSE](LICENSE).
